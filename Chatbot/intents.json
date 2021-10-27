@@ -1,0 +1,62 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Greetings",
+        "Hey, how are you?",
+        "Good day!",
+        "Is anyone here?"
+      ],
+      "responses": [
+        "Hey there!",
+        "Hello!",
+        "Hi!",
+        "Hi there, what can I do for you?",
+        "Greetings!"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you",
+        "Goodbye"
+      ],
+      "responses": [
+        "Have a lovely day!",
+        "Bye bye!",
+        "Hope to see you soon!",
+        "Great chat, see you!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "Thanks a lot"
+      ],
+      "responses": [
+        "Happy to help!",
+        "You're most welcome!",
+        "My pleasure"
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": [
+        "Tell me a joke",
+        "Do you know any jokes?",
+        "Tell me something funny"
+      ],
+      "responses": [
+        "What's the best thing about Switzerland? I don't know, but the flag is a big plus",
+        "I invented a new word! Plagiarism!",
+        "Did you hear about the claustrophobic astronaut? He just needed a little space."
+      ]
+    }
+  ]
+}
