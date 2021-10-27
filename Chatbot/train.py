@@ -2,9 +2,9 @@ import json
 from nltk_utils import tokenize, stem, bow
 import numpy as np
 
-# import torch
-# import torch.nn as nn
-# from torch.utils.data improt Dataset, DataLoader
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
 
 with open('intents.json', 'r') as f:
     intents = json.load(f)
