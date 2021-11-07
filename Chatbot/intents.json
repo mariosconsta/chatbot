@@ -46,6 +46,17 @@
       ]
     },
     {
+      "tag": "smoothie_categories",
+      "patterns": [
+        "What smoothie categories do you have?",
+        "What are the categories for your smoothies.",
+        "Do you have any smoothie categories?"
+      ],
+      "responses": [
+        "Our smoothie categories are Berry Smoothies, Tropical Smoothies and Protein Smoothies!"
+      ]
+    },
+    {
       "tag": "jokes",
       "patterns": [
         "Tell me a joke",
