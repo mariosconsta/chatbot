@@ -69,7 +69,7 @@
       "context_set": "product_categories"
     },
     {
-      "tag": "products",
+      "tag": "categories",
       "patterns": [
         "Yes!",
         "Of course!",
