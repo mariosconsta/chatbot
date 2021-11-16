@@ -57,6 +57,32 @@
       ]
     },
     {
+      "tag": "products",
+      "patterns": [
+        "What products do you sell?",
+        "What are your available products?",
+        "What do you sell?"
+      ],
+      "responses": [
+        "We sell smoothies and juices! Would you like to know our product categories?"
+      ],
+      "context_set": "product_categories"
+    },
+    {
+      "tag": "products",
+      "patterns": [
+        "Yes!",
+        "Of course!",
+        "Sure",
+        "Yeah",
+        "Okay"
+      ],
+      "responses": [
+        "Our smoothie categories are Berry Smoothies, Tropical Smoothies and Protein Smoothies and for our juices we have Boost, Detox and Glow! Would you like a smoothie or a juice?"
+      ],
+      "context_set": "product_categories"
+    },
+    {
       "tag": "jokes",
       "patterns": [
         "Tell me a joke",
