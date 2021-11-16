@@ -13,7 +13,7 @@
     },
     {
       "tag": "takeaway",
-      "patterns": ["Is take away available?", "Can I pick my order take away?"],
+      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "take away", "Can I order for takeaway?"],
       "responses": ["Yes, when would you like to pick up your order?"],
       "context_set": "takeaway"
     },
@@ -38,13 +38,13 @@
       "tag": "strawberry",
       "patterns": ["Strawberry Patch", "Strawberry", "Patch"],
       "responses": ["Strawberry Patch has Banana, Strawberries, Turbinado and Honey!"],
-      "context_set": "smoothies"
+      "context_filter": "smoothies"
     },
     {
       "tag": "berry",
       "patterns": ["Very Berry"],
       "responses": ["Very Berry has Strawberries, Raspberries, Blueberries, Yogurt, Soy Milk, Honey, Turbinado and Protein!"],
-      "context_set": "smoothies"
+      "context_filter": "smoothies"
     },
     {
       "tag": "tropical",
