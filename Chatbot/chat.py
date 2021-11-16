@@ -42,13 +42,12 @@ def response(msg, userID='123'):
     if probs.item() > 0.75:
         for intent in intents["intents"]:
             if tag == intent["tag"]:
-                if 'context_set' in i:
+                if 'context_set' in intents:
                     context[userID] = i['context_set']             
                 #return random.choice(intent['responses'])
                 
-                if not 'context_filter' in i or \
+                if not 'context_filter' in intents or \
                  (userID in context and 'context_filter' in i and i['context_filter'] == context[userID]):
                      return random.choice(intent['responses'])
                      
     return "I do not understand..."
-    
