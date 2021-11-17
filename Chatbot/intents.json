@@ -13,7 +13,7 @@
     },
     {
       "tag": "takeaway",
-      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "take away", "Can I order for takeaway?"],
+      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "take away", "Can I order for takeaway?", "I would like to order for takeaway"],
       "responses": ["Yes, when would you like to pick up your order?"],
       "context_set": "takeaway"
     },
