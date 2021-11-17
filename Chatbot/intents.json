@@ -50,7 +50,7 @@
       "tag": "tropical",
       "patterns": ["Tropical Squeeze"],
       "responses": ["Tropical Squeeze has Strawberries, Banana, Pineapple, Mango, Papaya, Orange, Honey and Turbinado!"],
-      "context_set": "smoothies"
+      "context_filter": "smoothies"
     },
     {
       "tag": "goodbye",
