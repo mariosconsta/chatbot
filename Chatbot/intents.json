@@ -31,7 +31,7 @@
     {
       "tag": "smoothies",
       "patterns": ["I want a smoothie", "What smoothies do you have?", "smoothie"],
-      "responses": ["We have Strawberry Patch, Very Berry and Tropical Squeeze! What smoothie would you like?"],
+      "responses": ["We have Strawberry Patch, Very Berry, Tropical Squeeze and After Workout ! What smoothie would you like?"],
       "context_set": "smoothies"
     },
     {
@@ -51,6 +51,42 @@
       "patterns": ["Tropical Squeeze"],
       "responses": ["Tropical Squeeze has Strawberries, Banana, Pineapple, Mango, Papaya, Orange, Honey and Turbinado!"],
       "context_filter": "smoothies"
+    },
+    {
+      "tag": "protein",
+      "patterns": ["After Workout"],
+      "responses": ["After Workout has Strawberries, Banana, Papaya, Soy Milk, Honey, Vanilla, Turbinado and 14g of protein"],
+      "context_filter": "smoothies"
+    },
+    {
+      "tag": "juices",
+      "patterns": ["I want a juice", "What juices do you have?", "juice"],
+      "responses": ["We have Green Detox, Ginger Breeze, Watermelon Bliss and P.A.L.M! What juice would you like?"],
+      "context_set": "juices"
+    },
+    {
+      "tag": "detox",
+      "patterns": ["Green Detox"],
+      "responses": ["Green Detox has Kale, Spinach, Ginger, Cucumber and Apple"],
+      "context_filter": "juices"
+    },
+    {
+      "tag": "ginger",
+      "patterns": ["Ginger Breeze"],
+      "responses": ["Ginger Breeze has Carrot, Apple and Ginger"],
+      "context_filter": "juices"
+    },
+    {
+      "tag": "watermelon",
+      "patterns": ["Watermelon Bliss"],
+      "responses": ["Watermelon Bliss has Watermelon, Apple and Orange"],
+      "context_filter": "juices"
+    },
+    {
+      "tag": "pineapple",
+      "patterns": ["P.A.L.M"],
+      "responses": ["P.A.L.M has Pineapple, Apple, Lime and Mint"],
+      "context_filter": "juices"
     },
     {
       "tag": "goodbye",
