@@ -36,25 +36,25 @@
     },
     {
       "tag": "strawberry",
-      "patterns": ["Strawberry Patch", "Strawberry", "Patch"],
+      "patterns": ["Strawberry Patch", "Strawberry", "Patch", "I want a smoothie with strawberry"],
       "responses": ["Strawberry Patch has Banana, Strawberries, Turbinado and Honey!"],
       "context_filter": "smoothies"
     },
     {
       "tag": "berry",
-      "patterns": ["Very Berry"],
+      "patterns": ["Very Berry", "I want a smoothie with berries", "berries"],
       "responses": ["Very Berry has Strawberries, Raspberries, Blueberries, Yogurt, Soy Milk, Honey, Turbinado and Protein!"],
       "context_filter": "smoothies"
     },
     {
       "tag": "tropical",
-      "patterns": ["Tropical Squeeze"],
+      "patterns": ["Tropical Squeeze", "I want a smoothie with banana", "tropical"],
       "responses": ["Tropical Squeeze has Strawberries, Banana, Pineapple, Mango, Papaya, Orange, Honey and Turbinado!"],
       "context_filter": "smoothies"
     },
     {
       "tag": "protein",
-      "patterns": ["After Workout"],
+      "patterns": ["After Workout", "I want a smoothie with protein", "protein"],
       "responses": ["After Workout has Strawberries, Banana, Papaya, Soy Milk, Honey, Vanilla, Turbinado and 14g of protein"],
       "context_filter": "smoothies"
     },
@@ -66,25 +66,25 @@
     },
     {
       "tag": "detox",
-      "patterns": ["Green Detox"],
+      "patterns": ["Green Detox", "I want a juice with cucumber", "cucumber"],
       "responses": ["Green Detox has Kale, Spinach, Ginger, Cucumber and Apple"],
       "context_filter": "juices"
     },
     {
       "tag": "ginger",
-      "patterns": ["Ginger Breeze"],
+      "patterns": ["Ginger Breeze", "I want a juice with ginger", "ginger"],
       "responses": ["Ginger Breeze has Carrot, Apple and Ginger"],
       "context_filter": "juices"
     },
     {
       "tag": "watermelon",
-      "patterns": ["Watermelon Bliss"],
+      "patterns": ["Watermelon Bliss", "I want a juice with watermelon"],
       "responses": ["Watermelon Bliss has Watermelon, Apple and Orange"],
       "context_filter": "juices"
     },
     {
       "tag": "pineapple",
-      "patterns": ["P.A.L.M"],
+      "patterns": ["P.A.L.M", "I want a juice with pineapple", "pineapple"],
       "responses": ["P.A.L.M has Pineapple, Apple, Lime and Mint"],
       "context_filter": "juices"
     },
