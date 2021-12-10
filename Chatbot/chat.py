@@ -39,7 +39,7 @@ def response(msg, userID='123'):
     probs = torch.softmax(output, dim=1)
     probs = probs[0][predicted.item()]
     
-    if probs.item() > 0.75:
+    if probs.item() > 0.65:
         for intent in intents["intents"]:
             if tag == intent["tag"]:
                 if 'context_set' in intent:

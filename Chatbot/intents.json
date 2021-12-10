@@ -8,19 +8,31 @@
     },
     {
       "tag": "hours",
-      "patterns": ["When do you open?", "Are you open today?", "What are your working hours?"],
+      "patterns": ["When do you open?", "Are you open today?", "What are your working hours?", "time"],
       "responses": ["We are open from Monday to Sunday from 08:00AM until 07:00PM!"]
     },
     {
       "tag": "takeaway",
-      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "take away", "Can I order for takeaway?", "I would like to order for takeaway"],
-      "responses": ["Yes, when would you like to pick up your order?"],
+      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "takeaway","take away", "Can I order for takeaway?", "I would like to order for takeaway"],
+      "responses": ["Would you like to pick up your order today?"],
       "context_set": "takeaway"
     },
     {
-      "tag": "today",
-      "patterns": ["today"],
+      "tag": "today_takeway",
+      "patterns": ["today","In 10 minutes","In 20 minutes","In 30 minutes","In a few hours","In 1 hour","In 2 hours","In 3 hours","Later today","Afternoon", "noon", "yes", "of course", "yeah", "sure","yep"],
       "responses": ["Of course, feel free to call us at STORE_NUMBER so we can take your order!"],
+      "context_filter": "takeaway"
+    },
+    {
+      "tag": "no_today_takeway",
+      "patterns": ["no", "nope", "nah"],
+      "responses": ["When would you like to pick up your order?."],
+      "context_filter": "takeaway"
+    },
+    {
+      "tag": "schedule_takeway",
+      "patterns": ["Tomorrow", " In two days", "In three days", "Monday", "Tuesday", "Thursday", "Wednesday", "Friday", "Saturday", "Sunday"],
+      "responses": ["Of course, feel free to call us at STORE_NUMBER so we can take your order and arrange a pick up time!"],
       "context_filter": "takeaway"
     },
     {
