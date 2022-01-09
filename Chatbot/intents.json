@@ -8,19 +8,31 @@
     },
     {
       "tag": "hours",
-      "patterns": ["When do you open?", "Are you open today?", "What are your working hours?"],
+      "patterns": ["When do you open?", "Are you open today?", "What are your working hours?", "time"],
       "responses": ["We are open from Monday to Sunday from 08:00AM until 07:00PM!"]
     },
     {
       "tag": "takeaway",
-      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "take away", "Can I order for takeaway?", "I would like to order for takeaway"],
-      "responses": ["Yes, when would you like to pick up your order?"],
+      "patterns": ["Is takeaway available?", "Can I pick my order take away?", "takeaway","take away", "Can I order for takeaway?", "I would like to order for takeaway"],
+      "responses": ["Would you like to pick up your order today?"],
       "context_set": "takeaway"
     },
     {
-      "tag": "today",
-      "patterns": ["today"],
+      "tag": "today_takeway",
+      "patterns": ["today","In 10 minutes","In 20 minutes","In 30 minutes","In a few hours","In 1 hour","In 2 hours","In 3 hours","Later today","Afternoon", "noon", "yes", "of course", "yeah", "sure","yep"],
       "responses": ["Of course, feel free to call us at STORE_NUMBER so we can take your order!"],
+      "context_filter": "takeaway"
+    },
+    {
+      "tag": "no_today_takeway",
+      "patterns": ["no", "nope", "nah"],
+      "responses": ["When would you like to pick up your order?."],
+      "context_filter": "takeaway"
+    },
+    {
+      "tag": "schedule_takeway",
+      "patterns": ["Tomorrow", " In two days", "In three days", "Monday", "Tuesday", "Thursday", "Wednesday", "Friday", "Saturday", "Sunday"],
+      "responses": ["Of course, feel free to call us at STORE_NUMBER so we can take your order and arrange a pick up time!"],
       "context_filter": "takeaway"
     },
     {
@@ -42,19 +54,19 @@
     },
     {
       "tag": "berry",
-      "patterns": ["Very Berry", "I want a smoothie with berries", "berries", "Raspberries", "I want a smoothie with raspberries", "Blueberries", "I want a smoothie with Blueberries"],
+      "patterns": ["Very Berry", "I want a smoothie with berries", "berries"],
       "responses": ["Very Berry has Strawberries, Raspberries, Blueberries, Yogurt, Soy Milk, Honey, Turbinado and Protein!"],
       "context_filter": "smoothies"
     },
     {
       "tag": "tropical",
-      "patterns": ["Tropical Squeeze", "I want a smoothie with banana", "tropical", "Banana", "I want a smoothie with Pineapple", "Pineapple", "I want a smoothie with Mango", "Mango", "I want a smoothie with Papaya", "Papaya"],
+      "patterns": ["Tropical Squeeze", "I want a smoothie with banana", "tropical"],
       "responses": ["Tropical Squeeze has Strawberries, Banana, Pineapple, Mango, Papaya, Orange, Honey and Turbinado!"],
       "context_filter": "smoothies"
     },
     {
       "tag": "protein",
-      "patterns": ["After Workout", "I want a smoothie with protein", "protein", "I want a smoothie with Vanilla", "Vanilla", "I want a smoothie with Turbinado", "Turbinado", "I want a smoothie with Soy Milk", "Soy Milk"],
+      "patterns": ["After Workout", "I want a smoothie with protein", "protein"],
       "responses": ["After Workout has Strawberries, Banana, Papaya, Soy Milk, Honey, Vanilla, Turbinado and 14g of protein"],
       "context_filter": "smoothies"
     },
@@ -66,25 +78,25 @@
     },
     {
       "tag": "detox",
-      "patterns": ["Green Detox", "I want a juice with cucumber", "cucumber", "I want a juice with Kale", "Kale", "I want a juice with Spinach", "Spinach"],
+      "patterns": ["Green Detox", "I want a juice with cucumber", "cucumber"],
       "responses": ["Green Detox has Kale, Spinach, Ginger, Cucumber and Apple"],
       "context_filter": "juices"
     },
     {
       "tag": "ginger",
-      "patterns": ["Ginger Breeze", "I want a juice with ginger", "ginger", "I want a juice with Carrot", "Carrot", "I want a juice with Apple", "Apple"],
+      "patterns": ["Ginger Breeze", "I want a juice with ginger", "ginger"],
       "responses": ["Ginger Breeze has Carrot, Apple and Ginger"],
       "context_filter": "juices"
     },
     {
       "tag": "watermelon",
-      "patterns": ["Watermelon Bliss", "I want a juice with watermelon", "Watermelon", "I want a juice with Orange", "Orange"],
+      "patterns": ["Watermelon Bliss", "I want a juice with watermelon"],
       "responses": ["Watermelon Bliss has Watermelon, Apple and Orange"],
       "context_filter": "juices"
     },
     {
       "tag": "pineapple",
-      "patterns": ["P.A.L.M", "I want a juice with pineapple", "pineapple", "I want a juice with Lime", "Lime", "I want a juice with Mint", "Mint"],
+      "patterns": ["P.A.L.M", "I want a juice with pineapple", "pineapple"],
       "responses": ["P.A.L.M has Pineapple, Apple, Lime and Mint"],
       "context_filter": "juices"
     },
