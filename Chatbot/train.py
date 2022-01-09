@@ -16,17 +16,19 @@ from model import Neuralnet
 with open('intents.json', 'r') as f:
     intents = json.load(f)
 
-all_words = [] #we create empty words, we want to collect all the differnet patterns
-tags = [] #we create an empty array for all the different patterns of json
-xy = [] #we create an empty array witch contain all the different patterns and tags
+#Empty Arrays for all words, tags and x/y
+all_words = []
+tags = []
+xy = []
 
+#Scan each intent and its words. Add them to their array while appling tokenization and stemming
 for intent in intents['intents']:
     tag = intent['tag'] #tags from the json file
     tags.append(tag) #adding tags to the array
     for pattern in intent['patterns']:
         w = tokenize(pattern) #tokenization of each pattern
         all_words.extend(w) #insert each word into the all_words array
-        xy.append((w,tag)) #create corralation between each tag and word
+        xy.append((w,tag)) #create corralation between each tag and word for each intent
         
 ignore_words = ['?', '!', '.', ','] #these words will be ignored
 
@@ -38,73 +40,82 @@ tags = sorted(set(tags)) #remove duplicate tags
 X_train = [] # array for bow (bag of words)
 y_train = [] #array for tags
 
+#Insert data into our X_train and y_train
 for (pattern_sentence, tag) in xy:
-    bag = bow(pattern_sentence, all_words) #we create a bag of words, it will collect the tokenized sentences
-    X_train.append(bag) # kai to prosaptoyme sto training data mas
+    bag = bow(pattern_sentence, all_words)
+    X_train.append(bag)
     
-    label = tags.index(tag) # numbers for tags 
+    label = tags.index(tag) 
     y_train.append(label) #CrossEntropy Loss
     
+#Set X_train and y_train as np arrays
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-class ChatDataset(Dataset): #we create a new dataset
+#Create a new dataset as a class
+class ChatDataset(Dataset):
     def __init__(self):
-        self.n_samples = len(X_train) #sumples numbe equals to the size of the array x_train
-        self.x_data = X_train # datas in the array
+        self.n_samples = len(X_train)
+        self.x_data = X_train
         self.y_data = y_train
     
     def __getitem__(self, index):
-        return self.x_data[index], self.y_data[index] # epistrefei ta dedomena twn pinakwn
+        return self.x_data[index], self.y_data[index]
     
     def __len__(self):
-        return self.n_samples #epistrefei ton arithmo twnd deigamtwn
+        return self.n_samples
     
 
 # Hyperparameters
 batch_size = 8
 hidden_size = 8
-output_size = len(tags) #number of different classes
-input_size = len(all_words) #number of the lenght of each bag of word. Exei to idio megethos oso oles oi lekseis
+output_size = len(tags)
+input_size = len(all_words)
 learning_rate = 0.001
 num_epochs = 1000
-    
+
+#Save our dataset    
 dataset = ChatDataset()
+#Use our dataset in a data loader with all the hyperparameters we created
 train_loader = DataLoader(dataset=dataset , batch_size=batch_size, shuffle = True, num_workers=0) #create a data loader with these  characteristics
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') #elegxoyme an exoyme gpu support gia na to xrhsimopoihsoyme
+#Check we have an nVidia card to use for training, else use the CPU
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+#Set our model with its hyperparameters
 model = Neuralnet(input_size, hidden_size, output_size).to(device)
 
 # loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
 
-for epoch in range(num_epochs): #training loop
-    for(words, labels) in train_loader: #training loader
-        words = words.to(device) #puss it to the device
+#Training Loop
+for epoch in range(num_epochs):
+    for(words, labels) in train_loader:
+        words = words.to(device)
         labels = labels.to(dtype=torch.long).to(device)
         
-        #forward
         outputs = model(words)
-        loss = criterion(outputs, labels) #calculate the loss
+        loss = criterion(outputs, labels)
         
-        #backward and optimizer step
-        optimizer.zero_grad() #empty the gradience
-        loss.backward() #calculate the back propagation
+        optimizer.zero_grad()
+        loss.backward()
         optimizer.step()
         
     if(epoch + 1) % 100 == 0:
-        print(f'epoch {epoch + 1}/{num_epochs}, loss = {loss.item():.4f}') #every 100 steps provide epoch
+        print(f'epoch {epoch + 1}/{num_epochs}, loss = {loss.item():.4f}')
         
-print(f'final loss, loss = {loss.item():.4f}') #provide final loss
-# save the data
+#Print final epoch loss
+print(f'final loss, loss = {loss.item():.4f}')
+
+#Save data into data.pth file for later use
 data = {
-    "model_state": model.state_dict(), #save the model state
-    "input_size": input_size, #save the input size
-    "output_size": output_size, #save the output size
-    "hidden_size": hidden_size, #save the hiden size
-    "all_words": all_words, #store all the words that we colected
-    "tags": tags #store all the tags
+    "model_state": model.state_dict(),
+    "input_size": input_size,
+    "output_size": output_size,
+    "hidden_size": hidden_size,
+    "all_words": all_words,
+    "tags": tags 
 }
 
 FILE = "data.pth"
