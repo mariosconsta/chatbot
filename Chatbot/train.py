@@ -1,27 +1,27 @@
-import json #bazoyme to json arxeio poy exoyme ftiaksei
+import json #import json folder
 
 from torch import optim 
 from nltk_utils import tokenize, stem, bow
-import numpy as np #h bibliothikh numpy prosthetei yposthriksh gia polidiastatoys pinakes 
+import numpy as np #numpy  is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays.
 
-import torch #einai mia beltistopoihmenh bibliothikh poy periexei domes dedomenwn kai orizei mathhmatikes prakseis
-import torch.nn as nn #mas bohthaei na dhmioyrghsoyme kai na ekpaideysoyme to neural natwork
+import torch #PyTorch is an open source machine learning library based on the Torch library, used for applications such as computer vision and natural language processing
+import torch.nn as nn #helps us to create and train neural natwork
 from torch.utils.data import Dataset, DataLoader #bohthaei sthn polydiastath fortwsh dedomenwn, sto aytomatopoihmeno batching, ftiaxnei thn seira fortwshs dedomenwn
 
 from model import Neuralnet
 
-with open('intents.json', 'r') as f: #fortwnoyme to json arxeio se read mode('r')
+with open('intents.json', 'r') as f: #load json file on read mode('r')
     intents = json.load(f)
 
-all_words = [] #dhmioyrgoyme kenes listes, epshs theloyme na sylleksoyme ola ta diaforetika motiba
-tags = [] #dhmioyrgoyme mia kenh lista gia ta diaforetika tags toy json
-xy = [] #dhmioyrgoyme mia kenh lista poy tha periexei ola ta patterns kai ta tags mas
+all_words = [] #we create empty words, we want to collect all the differnet patterns
+tags = [] #we create an empty array for all the different patterns of json
+xy = [] #we create an empty array witch contain all the different patterns and tags
 
 for intent in intents['intents']:
-    tag = intent['tag'] #ayta einai ta tags toy arxeioy json
-    tags.append(tag) #tha to prosapsoyme ston pinaka tags
+    tag = intent['tag'] #these are the tags from the json file
+    tags.append(tag) #we will add them in the tags array
     for pattern in intent['patterns']:
-        w = tokenize(pattern) #kanoyme tokenization sta patterns dhladh se ayta poy plhktrologei o xrhsths
+        w = tokenize(pattern) #tokenization the patterns (users input)
         all_words.extend(w) # ta bazoyme ston pinaka (all words). bazoyme to extend giati einai hdh array kai den theloyme na exoyme array apo arrays
         xy.append((w,tag)) #tha kserei to pattern kai to tag
         
@@ -32,23 +32,23 @@ all_words = sorted(set(all_words)) #afairoyme ta diplotypa stoixeia
 
 tags = sorted(set(tags)) # tha exei monadikes etiketes
 
-X_train = [] # lista gia to bow (bag of words)
-y_train = [] #lista gia ta tags
+X_train = [] # array for bow (bag of words)
+y_train = [] #array for tags
 
 for (pattern_sentence, tag) in xy:
-    bag = bow(pattern_sentence, all_words) #ftiaxnoyme ena bag of words, tha parei tis tokenized protaseis
+    bag = bow(pattern_sentence, all_words) #we create a bag of words, it will collect the tokenized sentences
     X_train.append(bag) # kai to prosaptoyme sto training data mas
     
-    label = tags.index(tag) # tha exoyme arithmoys gia ta tags mas 
+    label = tags.index(tag) # numbers for tags 
     y_train.append(label) #CrossEntropy Loss
     
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-class ChatDataset(Dataset): #dhmioyrgoyme ena neo dataset
+class ChatDataset(Dataset): #we create a new dataset
     def __init__(self):
-        self.n_samples = len(X_train) # o arithmos twn deigmatwn einai isos me to megethos toy pinaka x_train
-        self.x_data = X_train # bazoyme ta dedomena ston pinaka
+        self.n_samples = len(X_train) #sumples numbe equals to the size of the array x_train
+        self.x_data = X_train # datas in the array
         self.y_data = y_train
     
     def __getitem__(self, index):
@@ -67,7 +67,7 @@ learning_rate = 0.001
 num_epochs = 1000
     
 dataset = ChatDataset()
-train_loader = DataLoader(dataset=dataset , batch_size=batch_size, shuffle = True, num_workers=0) #dhmioyrgoyme enan data loader me ayta ta xarakthristika 
+train_loader = DataLoader(dataset=dataset , batch_size=batch_size, shuffle = True, num_workers=0) #create a data loader with these  characteristics
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') #elegxoyme an exoyme gpu support gia na to xrhsimopoihsoyme
 model = Neuralnet(input_size, hidden_size, output_size).to(device)
@@ -91,9 +91,9 @@ for epoch in range(num_epochs): #training loop
         optimizer.step()
         
     if(epoch + 1) % 100 == 0:
-        print(f'epoch {epoch + 1}/{num_epochs}, loss = {loss.item():.4f}') #kathe 100 bhmata theloyme na dinei to epoch
+        print(f'epoch {epoch + 1}/{num_epochs}, loss = {loss.item():.4f}') #every 100 steps provide epoch
         
-print(f'final loss, loss = {loss.item():.4f}') #dinei to final loss
+print(f'final loss, loss = {loss.item():.4f}') #provide final loss
 # save the data
 data = {
     "model_state": model.state_dict(), #save the model state

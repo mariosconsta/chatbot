@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 # Feed-forward NN with 2 hidden layers
-class Neuralnet(nn.Module): #tha einai ena fedd forword neural net me ena layer poy tha exei toys arithmoys apo diaforetika patterns kai me dyo hidden layers poy tha pairnei to bag of words kai tha dinei pithanotites gia to kathe class
+class Neuralnet(nn.Module): #it will be a feed forward neural net with layer wich will has numbers from different patterns and with two hidden layers that will take the bag of words and will give possibilities for every class
     def __init__(self, input_size, hidden_size, num_classes):
         super(Neuralnet, self).__init__()
         self.l1 = nn.Linear(input_size, hidden_size)
@@ -10,7 +10,7 @@ class Neuralnet(nn.Module): #tha einai ena fedd forword neural net me ena layer 
         self.l3 = nn.Linear(hidden_size, num_classes)
         self.relu = nn.ReLU()
         
-    def forward(self, x): #exoyme tria layers opws eipame kai parapanw
+    def forward(self, x): #we have three layers as we mentioned
         out = self.l1(x)
         out = self.relu(out)
         

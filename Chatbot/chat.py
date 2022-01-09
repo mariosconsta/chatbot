@@ -34,7 +34,7 @@ def response(msg, userID='123'):
     
     output = model(X)
     _, predicted = torch.max(output, dim=1) # tha mas dwsei thn problepsh
-    tag = tags[predicted.item()] # theloyme to tag toy intext
+    tag = tags[predicted.item()] # we want the intexts tag
     
     probs = torch.softmax(output, dim=1)
     probs = probs[0][predicted.item()]
