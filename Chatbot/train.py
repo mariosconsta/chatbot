@@ -1,16 +1,19 @@
-import json #import json folder
+#IMPORTS
+import json
 
 from torch import optim 
 from nltk_utils import tokenize, stem, bow
-import numpy as np #numpy  is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays.
+import numpy as np
 
-import torch #PyTorch is an open source machine learning library based on the Torch library, used for applications such as computer vision and natural language processing
-import torch.nn as nn #helps us to create and train neural natwork
-from torch.utils.data import Dataset, DataLoader #bohthaei sthn polydiastath fortwsh dedomenwn, sto aytomatopoihmeno batching, ftiaxnei thn seira fortwshs dedomenwn
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
 
 from model import Neuralnet
+###################################################################
 
-with open('intents.json', 'r') as f: #load json file on read mode('r')
+#load JSON file
+with open('intents.json', 'r') as f:
     intents = json.load(f)
 
 all_words = [] #we create empty words, we want to collect all the differnet patterns
@@ -18,19 +21,19 @@ tags = [] #we create an empty array for all the different patterns of json
 xy = [] #we create an empty array witch contain all the different patterns and tags
 
 for intent in intents['intents']:
-    tag = intent['tag'] #these are the tags from the json file
-    tags.append(tag) #we will add them in the tags array
+    tag = intent['tag'] #tags from the json file
+    tags.append(tag) #adding tags to the array
     for pattern in intent['patterns']:
-        w = tokenize(pattern) #tokenization the patterns (users input)
-        all_words.extend(w) # ta bazoyme ston pinaka (all words). bazoyme to extend giati einai hdh array kai den theloyme na exoyme array apo arrays
-        xy.append((w,tag)) #tha kserei to pattern kai to tag
+        w = tokenize(pattern) #tokenization of each pattern
+        all_words.extend(w) #insert each word into the all_words array
+        xy.append((w,tag)) #create corralation between each tag and word
         
-ignore_words = ['?', '!', '.', ','] # den tha lambanei ypopshn toy shmeia stikshs
+ignore_words = ['?', '!', '.', ','] #these words will be ignored
 
-all_words = [stem(w) for w in all_words if w not in ignore_words] #kanoyme stemming se oles tis lekseis gia to "w" sto "all words" ean den einai shmeio stikshs fysika
-all_words = sorted(set(all_words)) #afairoyme ta diplotypa stoixeia
+all_words = [stem(w) for w in all_words if w not in ignore_words] #Applying stemming too all words that are not ignored
+all_words = sorted(set(all_words)) #remove duplicate words
 
-tags = sorted(set(tags)) # tha exei monadikes etiketes
+tags = sorted(set(tags)) #remove duplicate tags
 
 X_train = [] # array for bow (bag of words)
 y_train = [] #array for tags
