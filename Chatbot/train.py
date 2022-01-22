@@ -10,18 +10,24 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
 from model import Neuralnet
-###################################################################
 
 #load JSON file
 with open('intents.json', 'r') as f:
     intents = json.load(f)
 
-#Empty Arrays for all words, tags and x/y
+
 all_words = []
 tags = []
 xy = []
 
 #Scan each intent and its words. Add them to their array while appling tokenization and stemming
+# The for loop iterates through each intent in the intents json file. 
+# The tag variable is assigned the value of the tag from the json file. 
+# The tags array is appended with the tag variable. 
+# The for loop iterates through each pattern in the intent json file. 
+# The w variable is assigned the tokenized version of the pattern. 
+# The all_words array is extended with the w variable. 
+# The xy array is appended with the tag and w variables.
 for intent in intents['intents']:
     tag = intent['tag'] #tags from the json file
     tags.append(tag) #adding tags to the array
@@ -41,6 +47,11 @@ X_train = [] # array for bow (bag of words)
 y_train = [] #array for tags
 
 #Insert data into our X_train and y_train
+# For each sentence in the training data, we create a bag of words. 
+# 
+# Then we label each bag with the appropriate label. 
+# 
+# Then we convert the labels to a numpy array and then we are ready to train our model.
 for (pattern_sentence, tag) in xy:
     bag = bow(pattern_sentence, all_words)
     X_train.append(bag)
@@ -52,7 +63,11 @@ for (pattern_sentence, tag) in xy:
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-#Create a new dataset as a class
+# The ChatDataset class inherits from the Dataset class. 
+# It takes the number of samples, the data, and the labels as arguments. 
+# It also initializes the number of samples and the data. 
+# The __getitem__ method returns the data and labels at a given index. 
+# The __len__ method returns the number of samples.
 class ChatDataset(Dataset):
     def __init__(self):
         self.n_samples = len(X_train)
@@ -76,10 +91,11 @@ num_epochs = 1000
 
 #Save our dataset    
 dataset = ChatDataset()
+
 #Use our dataset in a data loader with all the hyperparameters we created
 train_loader = DataLoader(dataset=dataset , batch_size=batch_size, shuffle = True, num_workers=0) #create a data loader with these  characteristics
 
-#Check we have an nVidia card to use for training, else use the CPU
+# This code is telling the computer to use the GPU if it is available. If not, it will use the CPU.
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 #Set our model with its hyperparameters
@@ -90,6 +106,10 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
 
 #Training Loop
+# 1. For each epoch, we iterate through all of the batches in the training set.
+# 2. For each batch, we forward pass the input data through the model, calculate the loss, and then
+# update the model weights.
+# 3. We also compute the loss periodically as we iterate through the epoch.
 for epoch in range(num_epochs):
     for(words, labels) in train_loader:
         words = words.to(device)

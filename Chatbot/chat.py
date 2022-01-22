@@ -1,17 +1,19 @@
-import random #theloyme random epilogh apo tis pithanes apanthseis
+import random
 import json
 import torch
 from model import Neuralnet
 from nltk_utils import bow, tokenize
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') #elegxoyme an exoyme gpu support
+# This code is telling the computer to use the GPU if it is available.
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-with open('intents.json', 'r') as f: #theloyme na anoiksoyme to file
+with open('intents.json', 'r') as f:
     intents = json.load(f)
     
 FILE = "data.pth"
 data = torch.load(FILE)
-#pairnoyme tis idies plhrofories me to train
+
+# Hyper-parameters
 input_size = data["input_size"] 
 hidden_size = data["hidden_size"]
 output_size = data["output_size"]
@@ -20,13 +22,20 @@ tags = data["tags"]
 model_state = data["model_state"]
 
 model = Neuralnet(input_size, hidden_size, output_size).to(device)
-model.load_state_dict(model_state) #load the state dict of the creation.
+model.load_state_dict(model_state)
 model.eval()
-# dhmioyrgoyme to chat
+
 context = {}
 bot_name = "Peanut"
 
 def response(msg, userID='123'):
+    '''
+    It takes in a sentence and a userID and returns a response based on the trained model.
+    
+    :param msg: the message that the bot is to respond to
+    :param userID: The user's unique ID, defaults to 123 (optional)
+    :return: A string.
+    '''
     sentence = tokenize(msg) #tokenize the sentence
     X = bow(sentence, all_words) #create the bag of words. me thn tokenized protash kai oles tis lekseis poy exoyme apo to saved arxeio
     X = X.reshape(1, X.shape[0]) #reshape
