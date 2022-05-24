@@ -10,7 +10,7 @@ class Neuralnet(nn.Module): #it will be a feed forward neural net with layer wic
         self.l3 = nn.Linear(hidden_size, num_classes)
         self.relu = nn.ReLU()
         
-    def forward(self, x): #we have three layers as we mentioned
+    def forward(self, x):
         out = self.l1(x)
         out = self.relu(out)
         
@@ -18,5 +18,5 @@ class Neuralnet(nn.Module): #it will be a feed forward neural net with layer wic
         out = self.relu(out)
         
         out = self.l3(out)
-        # No activation and no softmax
+        # No activation
         return out
