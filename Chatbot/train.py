@@ -21,7 +21,7 @@ tags = []
 xy = []
 
 #Scan each intent and its words. Add them to their array while appling tokenization and stemming
-# The for loop iterates through each intent in the intents json file. 
+# The for loop iterates through each intent in the intents json file.
 # The tag variable is assigned the value of the tag from the json file. 
 # The tags array is appended with the tag variable. 
 # The for loop iterates through each pattern in the intent json file. 

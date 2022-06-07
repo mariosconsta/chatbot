@@ -39,7 +39,7 @@ def response(msg, userID='123'):
     :return: A string.
     '''
     sentence = tokenize(msg) #tokenize the sentence
-    X = bow(sentence, all_words) #create the bag of words. me thn tokenized protash kai oles tis lekseis poy exoyme apo to saved arxeio
+    X = bow(sentence, all_words) #create the bag of words
     X = X.reshape(1, X.shape[0]) #reshape
     X = torch.from_numpy(X) #bag of words returns in numpy array
     
